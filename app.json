@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "CalendarConnectionV2",
-    "slug": "CalendarConnectionV2",
-    "version": "1.0.1",
+    "name": "React Native Firebase Starter",
+    "slug": "react-native-firebase-starter",
+    "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/CalendarConnectionv2AppIcon.png",
+    "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
-    "scheme": "calendarconnectionv2",
+    "scheme": "my-app-starter",
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
@@ -15,11 +15,7 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.ebraithwaite3.CalendarConnectionV2",
-      "buildNumber": "3",
-      "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
-      }
+      "bundleIdentifier": "com.yourname.myappstarter"
     },
     "android": {
       "adaptiveIcon": {
@@ -30,11 +26,6 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    },
-    "extra": {
-      "eas": {
-        "projectId": "e7f5f3db-cf61-439b-97c4-7595a8b68403"
-      }
     }
   }
 }
