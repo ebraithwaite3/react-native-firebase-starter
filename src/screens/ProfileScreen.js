@@ -10,33 +10,33 @@ const ProfileScreen = () => {
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
-      <Text style={[styles.title, { color: theme.text }]}>
+      <Text style={[styles.title, { color: theme.textPrimary }]}>
         Profile 👤
       </Text>
       
-      <View style={styles.infoSection}>
+      <View style={[styles.infoSection, { backgroundColor: theme.surface }]}>
         <Text style={[styles.label, { color: theme.textSecondary }]}>
           Email:
         </Text>
-        <Text style={[styles.value, { color: theme.text }]}>
+        <Text style={[styles.value, { color: theme.textPrimary }]}>
           {user?.email || 'Not available'}
         </Text>
       </View>
 
-      <View style={styles.infoSection}>
+      <View style={[styles.infoSection, { backgroundColor: theme.surface }]}>
         <Text style={[styles.label, { color: theme.textSecondary }]}>
           User ID:
         </Text>
-        <Text style={[styles.value, { color: theme.text }]}>
+        <Text style={[styles.value, { color: theme.textPrimary }]}>
           {user?.uid || 'Not available'}
         </Text>
       </View>
 
-      <View style={styles.infoSection}>
+      <View style={[styles.infoSection, { backgroundColor: theme.surface }]}>
         <Text style={[styles.label, { color: theme.textSecondary }]}>
           Status:
         </Text>
-        <Text style={[styles.value, { color: theme.primary }]}>
+        <Text style={[styles.value, { color: theme.success }]}>
           ✅ Logged In
         </Text>
       </View>
@@ -59,8 +59,8 @@ const styles = StyleSheet.create({
   infoSection: {
     marginBottom: 20,
     padding: 15,
-    borderRadius: 8,
-    backgroundColor: 'rgba(0,0,0,0.05)',
+    borderRadius: 12,
+    // Removed fixed backgroundColor - now uses theme
   },
   label: {
     fontSize: 14,

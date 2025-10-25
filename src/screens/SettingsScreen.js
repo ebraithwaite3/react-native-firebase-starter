@@ -2,46 +2,62 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useTheme } from '../contexts/ThemeContext';
+import { useAuth } from '../contexts/AuthContext'; // Add this import
 
-const SettingsScreen = ({ onLogout }) => {
+const SettingsScreen = () => { // Remove onLogout prop
   const { theme, toggleTheme, isDarkMode } = useTheme();
+  const { logout } = useAuth(); // Get logout from auth context
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     Alert.alert(
       'Logout',
       'Are you sure you want to logout?',
       [
         { text: 'Cancel', style: 'cancel' },
-        { text: 'Logout', style: 'destructive', onPress: onLogout },
+        { 
+          text: 'Logout', 
+          style: 'destructive', 
+          onPress: async () => {
+            try {
+              await logout();
+            } catch (error) {
+              console.error('Logout error:', error);
+              Alert.alert('Error', 'Failed to logout. Please try again.');
+            }
+          }
+        },
       ]
     );
   };
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
-      <Text style={[styles.title, { color: theme.text }]}>
-        Settings ⚙️
-      </Text>
-      
-      <TouchableOpacity
-        style={[styles.settingButton, { backgroundColor: theme.surface }]}
-        onPress={toggleTheme}
-      >
-        <Text style={[styles.settingText, { color: theme.text }]}>
-          🌓 Switch to {isDarkMode ? 'Light' : 'Dark'} Mode
+      <View style={styles.content}>
+        <Text style={[styles.title, { color: theme.textPrimary }]}>
+          Settings
         </Text>
-      </TouchableOpacity>
+        
+        <TouchableOpacity
+          style={[styles.settingButton, { 
+            backgroundColor: theme.surface,
+            borderColor: theme.border,
+          }]}
+          onPress={toggleTheme}
+        >
+          <Text style={[styles.settingText, { color: theme.textPrimary }]}>
+            {isDarkMode ? '☀️' : '🌙'} Switch to {isDarkMode ? 'Light' : 'Dark'} Mode
+          </Text>
+        </TouchableOpacity>
 
-      <View style={styles.spacer} />
-
-      <TouchableOpacity
-        style={[styles.logoutButton, { backgroundColor: '#dc3545' }]}
-        onPress={handleLogout}
-      >
-        <Text style={styles.logoutText}>
-          🚪 Logout
-        </Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.logoutButton, { backgroundColor: theme.error || '#dc3545' }]}
+          onPress={handleLogout}
+        >
+          <Text style={styles.logoutText}>
+            Logout
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -50,10 +66,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    justifyContent: 'center',
+  },
+  content: {
+    paddingTop: 60, // Add some top padding instead of centering
   },
   title: {
-    fontSize: 28,
+    fontSize: 32,
     fontWeight: 'bold',
     marginBottom: 40,
     textAlign: 'center',
@@ -63,6 +81,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     marginVertical: 10,
     alignItems: 'center',
+    borderWidth: 1,
     elevation: 2,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -73,14 +92,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
   },
-  spacer: {
-    flex: 1,
-    minHeight: 40,
-  },
   logoutButton: {
     padding: 20,
     borderRadius: 12,
     alignItems: 'center',
+    marginTop: 40, // Fixed spacing instead of flex spacer
     elevation: 2,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },

@@ -12,13 +12,13 @@ const HomeScreen = () => {
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
-      <Text style={[styles.title, { color: theme.text }]}>
+      <Text style={[styles.title, { color: theme.textPrimary }]}>
         Welcome to Your App! 🎉
       </Text>
       <Text style={[styles.subtitle, { color: theme.textSecondary }]}>
         Hello, {user?.email || 'User'}!
       </Text>
-      <Text style={[styles.testData, { color: theme.text }]}>
+      <Text style={[styles.testData, { color: theme.primary }]}>
         Test Data: {testData}
       </Text>
       <Text style={[styles.description, { color: theme.textSecondary }]}>
